@@ -31,6 +31,10 @@ function setFilter(value: TasksFilter) {
   filter.value = value;
 }
 
+function clearCompleted() {
+  tasks.value = tasks.value.filter((task) => task.done !== true);
+}
+
 const filteredTasks = computed(() => {
   switch (filter.value) {
     case "all":
@@ -67,6 +71,9 @@ const filteredTasks = computed(() => {
         :currentFilter="filter"
         @set-filter="setFilter"
       />
+      <button class="contrast clear" @click="clearCompleted">
+        Clear Completed
+      </button>
     </div>
     <TaskList
       :tasks="filteredTasks"
@@ -87,5 +94,11 @@ main {
   gap: 4px;
   justify-content: end;
   align-items: center;
+}
+.clear {
+  color: rgb(225, 41, 41);
+  font-style: italic;
+
+  /* border: red; */
 }
 </style>
