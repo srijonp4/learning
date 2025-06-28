@@ -1,32 +1,25 @@
-import { Revenue } from "./definitions";
+import { Revenue } from './definitions';
 
 export const formatCurrency = (amount: number) => {
-  return (amount / 100).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
+  return (amount / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
   });
 };
-console.log(formatCurrency(100));
 
 export const formatDateToLocal = (
   dateStr: string,
-  locale: string = "en-US"
+  locale: string = 'en-US',
 ) => {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
 };
-
-const myDate = (new Date()).toISOString()
-console.log(myDate);
-console.log(formatDateToLocal(myDate));
-
-
 
 export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis
@@ -42,8 +35,6 @@ export const generateYAxis = (revenue: Revenue[]) => {
   return { yAxisLabels, topLabel };
 };
 
-
-
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
   // display all pages without any ellipsis.
@@ -54,13 +45,13 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the current page is among the first 3 pages,
   // show the first 3, an ellipsis, and the last 2 pages.
   if (currentPage <= 3) {
-    return [1, 2, 3, "...", totalPages - 1, totalPages];
+    return [1, 2, 3, '...', totalPages - 1, totalPages];
   }
 
   // If the current page is among the last 3 pages,
   // show the first 2, an ellipsis, and the last 3 pages.
   if (currentPage >= totalPages - 2) {
-    return [1, 2, "...", totalPages - 2, totalPages - 1, totalPages];
+    return [1, 2, '...', totalPages - 2, totalPages - 1, totalPages];
   }
 
   // If the current page is somewhere in the middle,
@@ -68,11 +59,11 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // another ellipsis, and the last page.
   return [
     1,
-    "...",
+    '...',
     currentPage - 1,
     currentPage,
     currentPage + 1,
-    "...",
+    '...',
     totalPages,
   ];
 };
